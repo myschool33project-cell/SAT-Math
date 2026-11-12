@@ -236,7 +236,7 @@ DB.doc("site/content").onSnapshot(d=>{if(d.exists){const x=d.data();S.tests=nt(x
 DB.doc("site/home").onSnapshot(d=>{if(d.exists)H=Object.assign({intro:"",quote:"",imgs:[]},d.data());ref()},()=>{});
 if(admin)subAdm()}
 boot=false;save();sync();names();draw()})}
-fbInit();
+window.addEventListener("load",fbInit);
 const isMem=c=>admin||appr.some(a=>a.id==c+"_"+ME);
 const okU=u=>{u=u.trim();if(/^(t\.me|telegram\.me)\//i.test(u))u="https://"+u;return/^https?:\/\/\S+$/i.test(u)?u:""};
 const TGC=()=>(S.links||[]).map((L,i)=>`<div class="card row sp"><div><h3>✈️ ${e(L.title)}</h3><span class="mu">${t("tgd")}</span></div><div class="row" style="flex-wrap:nowrap"><a class="btn" style="text-decoration:none;white-space:nowrap" href="${e(L.url)}" target="_blank" rel="noopener noreferrer">${t("tgb")}</a>${admin?`<button class="btn d" onclick="delL(${i})">✕</button>`:""}</div></div>`).join("")+(admin?`<div class="card"><h3>${t("tgt")}</h3><input id="ltt" placeholder="${t("cname")}"><input id="lur" placeholder="https://t.me/..."><button class="btn" onclick="addL()">${t("add")}</button></div>`:"");
