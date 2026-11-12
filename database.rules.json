@@ -1,0 +1,55 @@
+{
+  "rules": {
+    "site": {
+      ".read": "auth != null",
+      ".write": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com'"
+    },
+    "communities": {
+      ".read": "auth != null",
+      ".write": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com'"
+    },
+    "codes": {
+      ".read": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com'",
+      ".write": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com'"
+    },
+    "approved": {
+      ".read": "auth != null",
+      "$k": {
+        ".write": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com' || (auth != null && !data.exists() && newData.child('uid').val() == auth.uid)"
+      }
+    },
+    "posts": {
+      ".read": "auth != null",
+      "$id": {
+        ".write": "auth != null && (auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com' || newData.exists())"
+      }
+    },
+    "members": {
+      ".read": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com'",
+      "$u": {
+        ".write": "auth != null && auth.uid == $u"
+      }
+    },
+    "progress": {
+      ".read": "auth != null && auth.token.email_verified == true && auth.token.email == 'm42422663@gmail.com'",
+      "$u": {
+        ".read": "auth != null && auth.uid == $u",
+        ".write": "auth != null && auth.uid == $u"
+      }
+    },
+    "names": {
+      ".read": "auth != null",
+      "$u": {
+        ".write": "auth != null && auth.uid == $u"
+      }
+    },
+    "data": {
+      "users": {
+        "$u": {
+          ".read": "auth != null && auth.uid == $u",
+          ".write": "auth != null && auth.uid == $u"
+        }
+      }
+    }
+  }
+}
